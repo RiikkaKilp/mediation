@@ -26,7 +26,7 @@ public class RewardedAd : MonoBehaviour
         ShowAd();
     }
 
-    private void UpdateLog()
+    private void UpdateRewardLog()
     {
         adLog.UpdateRewardLog("Shown video ads: " + shownAdCount.ToString() + "\nRewards: " + rewardCount.ToString());
     }
@@ -58,7 +58,7 @@ public class RewardedAd : MonoBehaviour
 
     void AdFailedLoad(object sender, LoadErrorEventArgs args)
     {
-        Debug.Log("Failed to load ad");
+        adLog.UpdateLog("Rewarded Ad failed to load!");
         Debug.Log(args.Message);
     }
     #endregion
@@ -70,7 +70,7 @@ public class RewardedAd : MonoBehaviour
         {
             ad.Show();
             shownAdCount++;
-            UpdateLog();
+            UpdateRewardLog();
             adLog.UpdateLog("Show Rewarded Ad");
         }
         else
@@ -79,11 +79,12 @@ public class RewardedAd : MonoBehaviour
 
     void AdShown(object sender, EventArgs args)
     {
-
+        adLog.UpdateLog("Rewarded Ad shown");
     }
 
     void AdFailedShow(object sender, ShowErrorEventArgs args)
     {
+        adLog.UpdateLog("Failed to show Rewarded Ad!");
         Debug.Log(args.Message);
     }
     #endregion
@@ -91,7 +92,6 @@ public class RewardedAd : MonoBehaviour
     #region AdInteractions
     void AdClosed(object sender, EventArgs e)
     {
-        // Pre-load the next ad
         ad.Load();
         // Execute logic after an ad has been closed.
     }
@@ -103,13 +103,12 @@ public class RewardedAd : MonoBehaviour
     void ImpressionEvent(object sender, ImpressionEventArgs args)
     {
         var impressionData = args.ImpressionData != null ? JsonUtility.ToJson(args.ImpressionData, true) : "null";
-        //Debug.Log("Impression event from ad unit id " + args.AdUnitId + " " + impressionData);
     }
 
     void UserRewarded(object sender, RewardEventArgs e)
     {
         rewardCount++;
-        UpdateLog();
+        UpdateRewardLog();
     }
     #endregion
 }

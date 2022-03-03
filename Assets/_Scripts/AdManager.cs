@@ -7,6 +7,8 @@ public class AdManager : MonoBehaviour
 {
     string gameId = "4638146";
 
+    public AdLog adLog;
+
     public async void InitServices()
     {
         try
@@ -14,6 +16,7 @@ public class AdManager : MonoBehaviour
             InitializationOptions initializationOptions = new InitializationOptions();
             initializationOptions.SetGameId(gameId);
             await UnityServices.InitializeAsync(initializationOptions);
+            adLog.UpdateLog("Initialization complete");
         }
         catch (Exception e)
         {
@@ -23,6 +26,6 @@ public class AdManager : MonoBehaviour
 
     void InitializationFailed(Exception e)
     {
-        Debug.Log("Initialization Failed: " + e.Message);
+        adLog.UpdateLog("Initialization failed!");
     }
 }

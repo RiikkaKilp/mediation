@@ -51,7 +51,7 @@ public class InterstitialAd : MonoBehaviour
 
     void AdFailedLoad(object sender, LoadErrorEventArgs args)
     {
-        Debug.Log("Failed to load ad");
+        adLog.UpdateLog("Interstitial Ad failed to load!");
         Debug.Log(args.Message);
     }
     #endregion
@@ -71,7 +71,7 @@ public class InterstitialAd : MonoBehaviour
 
     void AdShown(object sender, EventArgs args)
     {
-
+        adLog.UpdateLog("Interstitial Ad shown");
     }
 
     void AdClosed(object sender, EventArgs e)
@@ -82,6 +82,7 @@ public class InterstitialAd : MonoBehaviour
     }
     void AdFailedShow(object sender, ShowErrorEventArgs args)
     {
+        adLog.UpdateLog("Failed to show Interstitial Ad!");
         Debug.Log(args.Message);
     }
     #endregion
@@ -96,7 +97,6 @@ public class InterstitialAd : MonoBehaviour
     void ImpressionEvent(object sender, ImpressionEventArgs args)
     {
         var impressionData = args.ImpressionData != null ? JsonUtility.ToJson(args.ImpressionData, true) : "null";
-        //Debug.Log("Impression event from ad unit id " + args.AdUnitId + " " + impressionData);
     }
     #endregion
 }

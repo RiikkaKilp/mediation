@@ -7,6 +7,7 @@ public class AdLog : MonoBehaviour
 {
     public TextMeshProUGUI debugLog;
     public TextMeshProUGUI rewardLog;
+
     // Suggestions:
     // Clear the log once the string gets too large, or just write a different system for logs alltogether
     private void Start()
